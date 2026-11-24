@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34d399"/>
+    </marker>
+    <style>
+      .box{fill:#0b1220;stroke-width:2}
+      .k{font-size:12px;font-weight:700;letter-spacing:.12em}
+      .t{font-size:18px;font-weight:700;fill:#f1f5f9}
+      .s{font-size:13px;fill:#94a3b8}
+      .l{font-size:12.5px;fill:#cbd5e1}
+      .link{stroke:#94a3b8;stroke-width:2;fill:none}
+      .fast{stroke:#34d399;stroke-width:2;fill:none;stroke-dasharray:7 5}
+      .tag{font-size:12.5px;fill:#94a3b8;font-style:italic}
+    </style>
+  </defs>
+  <rect width="1000" height="560" rx="14" fill="#05070c"/>
+
+  <!-- driver node -->
+  <rect class="box" x="30" y="40" width="280" height="200" rx="12" stroke="#ff2d75"/>
+  <text class="k" x="50" y="68" fill="#ff2d75">DRIVER NODE · ESP32</text>
+  <text class="t" x="50" y="96">Driver vitals</text>
+  <text class="l" x="50" y="124">MAX30100 · heart rate, SpO₂</text>
+  <text class="l" x="50" y="146">NTC thermistor · skin temp</text>
+  <text class="l" x="50" y="168">GSR module · perspiration</text>
+  <text class="l" x="50" y="190">Stretch belt · respiration</text>
+  <text class="l" x="50" y="212">MPU6050 · G-force</text>
+
+  <!-- cloud -->
+  <rect class="box" x="400" y="40" width="250" height="130" rx="12" stroke="#a78bfa"/>
+  <text class="k" x="420" y="68" fill="#a78bfa">CLOUD · THINGSPEAK</text>
+  <text class="t" x="420" y="96">Channel, fields 1–6</text>
+  <text class="s" x="420" y="120">Stores and charts the vitals</text>
+  <text class="s" x="420" y="142">Free licence: 1 write / 15 s</text>
+
+  <!-- hub -->
+  <rect class="box" x="400" y="300" width="250" height="190" rx="12" stroke="#facc15"/>
+  <text class="k" x="420" y="328" fill="#facc15">HUB · RASPBERRY PI 4B</text>
+  <text class="t" x="420" y="356">car_sender.py</text>
+  <text class="l" x="420" y="384">Reads the driver vitals</text>
+  <text class="l" x="420" y="406">Generates car data (mock model)</text>
+  <text class="l" x="420" y="428">Merges into one frame, Pi clock</text>
+  <text class="l" x="420" y="450">POSTs 2 frames/s, retries on loss</text>
+  <text class="s" x="420" y="474">optional: ADS1115 brake sensors</text>
+
+  <!-- pit wall -->
+  <rect class="box" x="720" y="300" width="260" height="190" rx="12" stroke="#22d3ee"/>
+  <text class="k" x="738" y="328" fill="#22d3ee">PIT WALL · LAPTOP</text>
+  <text class="t" x="738" y="356">server_and_ui.py</text>
+  <text class="l" x="738" y="384">Flask receiver + Dash/Plotly HUD</text>
+  <text class="l" x="738" y="406">Tyre map, brakes, vitals, trends</text>
+  <text class="l" x="738" y="428">Alert engine with hysteresis</text>
+  <text class="l" x="738" y="450">--demo: runs with no hardware</text>
+
+  <!-- links -->
+  <path class="link" d="M310 105 H396" marker-end="url(#a)"/>
+  <text class="tag" x="322" y="96">HTTP</text>
+  <text class="tag" x="322" y="126">every 20 s</text>
+  <path class="link" d="M525 172 V296" marker-end="url(#a)"/>
+  <text class="tag" x="537" y="230">REST read (--vitals thingspeak)</text>
+  <text class="tag" x="537" y="250">up to 15–20 s old</text>
+  <path class="fast" d="M170 242 V395 H396" marker-end="url(#ag)"/>
+  <text class="tag" x="182" y="378" style="fill:#34d399">GET /vitals on local Wi-Fi</text>
+  <text class="tag" x="182" y="420" style="fill:#34d399">--vitals local · about 1 s old</text>
+  <path class="link" d="M650 395 H716" marker-end="url(#a)"/>
+  <text class="tag" x="660" y="386">Wi-Fi</text>
+  <text class="tag" x="660" y="416">POST</text>
+
+  <text class="s" x="30" y="535">Solid: the original cloud path. Dashed green: local path added in the rebuild for lower latency.</text>
+</svg>

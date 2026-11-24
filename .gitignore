@@ -1,0 +1,28 @@
+# secrets
+secrets.h
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# generated data
+stint.csv
+*.log
+
+# Arduino / host test builds
+build/
+tests/fw/test_dsp
+*.elf
+*.bin
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+~$*

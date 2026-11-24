@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    name: Python + firmware DSP tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q
+
+  firmware:
+    name: ESP32 driver node build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 core and MAX30100 library
+        run: |
+          URL=https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core update-index --additional-urls $URL
+          arduino-cli core install esp32:esp32 --additional-urls $URL
+          arduino-cli lib install "MAX30100lib"
+      - name: Compile
+        run: |
+          cp firmware/driver_node/secrets.h.example firmware/driver_node/secrets.h
+          arduino-cli compile --fqbn esp32:esp32:esp32 --warnings default firmware/driver_node

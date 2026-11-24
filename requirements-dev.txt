@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest>=8
+matplotlib>=3.8      # tools/plot_stint.py
+playwright>=1.45     # tools/screenshot.py (then: playwright install chromium)

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .box{fill:#0b1220;stroke-width:2}
+      .k{font-size:12px;font-weight:700;letter-spacing:.1em}
+      .t{font-size:16px;font-weight:700;fill:#f1f5f9}
+      .l{font-size:12.5px;fill:#cbd5e1}
+      .m{font-size:11.5px;fill:#94a3b8;font-family:Consolas, "DejaVu Sans Mono", monospace}
+      .pin{font-size:12.5px;fill:#e2e8f0;font-family:Consolas, "DejaVu Sans Mono", monospace}
+      .w{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+      .dot{stroke:#05070c;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1000" height="600" rx="14" fill="#05070c"/>
+  <text x="30" y="40" style="font-size:20px;font-weight:700;fill:#f1f5f9">Driver node wiring · ESP32 DevKit (30-pin)</text>
+  <text x="30" y="62" class="l" style="fill:#94a3b8">All sensors on 3V3 and GND. Analog inputs on ADC1 only (ADC2 stops working while Wi-Fi is on).</text>
+
+  <!-- ESP32 -->
+  <rect x="400" y="100" width="200" height="420" rx="12" fill="#111827" stroke="#64748b" stroke-width="2"/>
+  <rect x="455" y="115" width="90" height="70" rx="4" fill="#1f2937" stroke="#475569"/>
+  <text x="500" y="155" text-anchor="middle" class="k" fill="#94a3b8">ESP-WROOM-32</text>
+  <text x="500" y="505" text-anchor="middle" class="k" fill="#64748b">USB</text>
+  <!-- left pins -->
+  <g class="pin">
+    <circle cx="400" cy="250" r="6" fill="#ff2d75" class="dot"/><text x="414" y="254">GPIO34</text>
+    <circle cx="400" cy="330" r="6" fill="#facc15" class="dot"/><text x="414" y="334">GPIO35</text>
+    <circle cx="400" cy="410" r="6" fill="#a78bfa" class="dot"/><text x="414" y="414">GPIO32</text>
+    <circle cx="400" cy="470" r="6" fill="#ef4444" class="dot"/><text x="414" y="474">3V3</text>
+    <circle cx="400" cy="495" r="6" fill="#94a3b8" class="dot"/><text x="414" y="499">GND</text>
+  </g>
+  <!-- right pins -->
+  <g class="pin">
+    <circle cx="600" cy="230" r="6" fill="#22d3ee" class="dot"/><text x="586" y="234" text-anchor="end">GPIO21 SDA</text>
+    <circle cx="600" cy="270" r="6" fill="#34d399" class="dot"/><text x="586" y="274" text-anchor="end">GPIO22 SCL</text>
+    <circle cx="600" cy="440" r="6" fill="#fb923c" class="dot"/><text x="586" y="444" text-anchor="end">GPIO2 LED</text>
+  </g>
+
+  <!-- respiration belt -->
+  <rect class="box" x="30" y="190" width="290" height="110" rx="10" stroke="#ff2d75"/>
+  <text class="k" x="46" y="214" fill="#ff2d75">RESPIRATION BELT</text>
+  <text class="t" x="46" y="238">Conductive-rubber stretch cord</text>
+  <text class="l" x="46" y="262">3V3 → 10 kΩ → GPIO34 → cord → GND</text>
+  <text class="l" x="46" y="282" style="fill:#94a3b8">Stretching changes the cord's resistance</text>
+  <path class="w" d="M320 250 H394" stroke="#ff2d75"/>
+
+  <!-- NTC -->
+  <rect class="box" x="30" y="310" width="290" height="80" rx="10" stroke="#facc15"/>
+  <text class="k" x="46" y="334" fill="#facc15">SKIN TEMPERATURE</text>
+  <text class="l" x="46" y="356">3V3 → 10 kΩ → GPIO35 → NTC → GND</text>
+  <text class="l" x="46" y="376" style="fill:#94a3b8">NTC 10 kΩ at 25 °C, B 3950, taped to skin</text>
+  <path class="w" d="M320 330 H394" stroke="#facc15"/>
+
+  <!-- GSR -->
+  <rect class="box" x="30" y="400" width="290" height="70" rx="10" stroke="#a78bfa"/>
+  <text class="k" x="46" y="424" fill="#a78bfa">PERSPIRATION · GSR MODULE</text>
+  <text class="l" x="46" y="448">VCC 3V3 · GND · SIG → GPIO32</text>
+  <path class="w" d="M320 410 H394" stroke="#a78bfa"/>
+
+  <!-- MAX30100 -->
+  <rect class="box" x="680" y="120" width="290" height="110" rx="10" stroke="#22d3ee"/>
+  <text class="k" x="696" y="144" fill="#22d3ee">PULSE OXIMETER · MAX30100</text>
+  <text class="t" x="696" y="168">I²C address 0x57</text>
+  <text class="l" x="696" y="192">VIN 3V3 · GND · SDA · SCL</text>
+  <text class="l" x="696" y="214" style="fill:#fb923c">Finger clip, light-shielded</text>
+
+  <!-- MPU6050 -->
+  <rect class="box" x="680" y="290" width="290" height="110" rx="10" stroke="#34d399"/>
+  <text class="k" x="696" y="314" fill="#34d399">ACCELEROMETER · MPU6050</text>
+  <text class="t" x="696" y="338">I²C address 0x68 (AD0 → GND)</text>
+  <text class="l" x="696" y="362">VCC 3V3 · GND · SDA · SCL</text>
+  <text class="l" x="696" y="384" style="fill:#94a3b8">Strapped to the chest, ±8 g range</text>
+
+  <!-- I2C bus -->
+  <path class="w" d="M606 230 H640 V160 H680" stroke="#22d3ee"/>
+  <path class="w" d="M640 230 V330 H680" stroke="#22d3ee"/>
+  <path class="w" d="M606 270 H655 V180 H680" stroke="#34d399"/>
+  <path class="w" d="M655 270 V350 H680" stroke="#34d399"/>
+  <circle cx="640" cy="230" r="4" fill="#22d3ee"/>
+  <circle cx="655" cy="270" r="4" fill="#34d399"/>
+
+  <!-- LED -->
+  <rect class="box" x="680" y="420" width="290" height="50" rx="10" stroke="#fb923c"/>
+  <text class="l" x="696" y="450">On-board LED · toggles on every heartbeat</text>
+  <path class="w" d="M606 440 H680" stroke="#fb923c" stroke-dasharray="4 5"/>
+
+  <text x="30" y="565" class="l" style="fill:#94a3b8">Piezo belt instead of a stretch cord: bias GPIO34 at 1.65 V with two 100 kΩ resistors, piezo + 1 MΩ in parallel from GPIO34 to the bias point.</text>
+  <text x="30" y="585" class="l" style="fill:#94a3b8">Cheap purple MAX30100 boards pull SDA/SCL up to 1.8 V: remove their 4.7 kΩ pull-ups or re-route them to 3V3 (see docs/wiring.md).</text>
+</svg>
